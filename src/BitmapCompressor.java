@@ -32,9 +32,30 @@ public class BitmapCompressor {
      * and writes the results to standard output.
      */
     public static void compress() {
+        byte code = 0;
+        String file = BinaryStdIn.readString();
+        boolean isOne = file.charAt(0) == '1';
+        boolean curIsOne;
+        int length = 0;
 
-        // TODO: complete compress()
-
+        for(int i = 1; i < file.length(); i++){
+            curIsOne = (file.charAt(i) == '1');
+            // If the current is the same as rest of the string add to string length
+            if(curIsOne == isOne){
+                length++;
+            }
+            else{
+                // If it's different, print out the string
+                if(isOne) {
+                    BinaryStdOut.write(isOne);
+                    BinaryStdOut.write(length, 7);
+                }
+                BinaryStdOut.write(code);
+                // And start a new count w/opposite value of isOne
+                isOne = !isOne;
+                length = 1;
+            }
+        }
         BinaryStdOut.close();
     }
 
