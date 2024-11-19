@@ -33,7 +33,7 @@ public class BitmapCompressor {
      */
     public static void compress() {
         byte code = 0;
-        String file = BinaryStdIn.readString();
+        String file = BinaryStdIn.read;
         boolean isOne = file.charAt(0) == '1';
         boolean curIsOne;
         int length = 0;
