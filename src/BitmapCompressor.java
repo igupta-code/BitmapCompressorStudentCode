@@ -23,7 +23,7 @@
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  *  @author Zach Blick
- *  @author YOUR NAME HERE
+ *  @author Isha Gupta
  */
 public class BitmapCompressor {
 
@@ -32,14 +32,12 @@ public class BitmapCompressor {
      * and writes the results to standard output.
      */
     public static void compress() {
-        byte code = 0;
-        String file = BinaryStdIn.read;
-        boolean isOne = file.charAt(0) == '1';
+        boolean isOne = BinaryStdIn.readBoolean();
+
         boolean curIsOne;
         int length = 0;
-
-        for(int i = 1; i < file.length(); i++){
-            curIsOne = (file.charAt(i) == '1');
+        while(!BinaryStdIn.isEmpty()){
+            curIsOne = BinaryStdIn.readBoolean();
             // If the current is the same as rest of the string add to string length
             if(curIsOne == isOne){
                 length++;
@@ -47,10 +45,14 @@ public class BitmapCompressor {
             else{
                 // If it's different, print out the string
                 if(isOne) {
-                    BinaryStdOut.write(isOne);
+                    // First number represents if it's one or zero, the other 7 represent how many
+                    BinaryStdOut.write(1,1);
                     BinaryStdOut.write(length, 7);
                 }
-                BinaryStdOut.write(code);
+                else{
+                    BinaryStdOut.write(0,1);
+                    BinaryStdOut.write(length, 7);
+                }
                 // And start a new count w/opposite value of isOne
                 isOne = !isOne;
                 length = 1;
@@ -64,9 +66,16 @@ public class BitmapCompressor {
      * and writes the results to standard output.
      */
     public static void expand() {
+        boolean isOne = BinaryStdIn.readBoolean();
+        int length = BinaryStdIn.readInt(7);
 
-        // TODO: complete expand()
-
+        while(!BinaryStdIn.isEmpty()) {
+            for (int i = 0; i < length; i++) {
+                BinaryStdOut.write(isOne);
+            }
+            isOne = BinaryStdIn.readBoolean();
+            length = BinaryStdIn.readInt(7);
+        }
         BinaryStdOut.close();
     }
 
