@@ -71,8 +71,10 @@ public class BitmapCompressor {
 
         while(!BinaryStdIn.isEmpty()) {
             for (int i = 0; i < length; i++) {
+                // Writes it out as a boolean (one bit)
                 BinaryStdOut.write(isOne);
             }
+            // Reads in the next 8 bits
             isOne = BinaryStdIn.readBoolean();
             length = BinaryStdIn.readInt(7);
         }
