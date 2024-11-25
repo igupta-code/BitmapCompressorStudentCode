@@ -26,6 +26,7 @@
  *  @author Isha Gupta
  */
 public class BitmapCompressor {
+    public static final int MAX_8BIT = 256;
 
     /**
      * Reads a sequence of bits from standard input, compresses them,
@@ -33,29 +34,33 @@ public class BitmapCompressor {
      */
     public static void compress() {
         boolean isOne = BinaryStdIn.readBoolean();
+        // runSize = Length
+        int runSize = 0;
+        boolean curIsOne = false;
 
-        boolean curIsOne;
-        int length = 0;
+
         while(!BinaryStdIn.isEmpty()){
-            curIsOne = BinaryStdIn.readBoolean();
-            // If the current is the same as rest of the string add to string length
-            if(curIsOne == isOne){
-                length++;
-            }
-            else{
-                // If it's different, print out the string
-                if(isOne) {
-                    // First number represents if it's one or zero, the other 7 represent how many
-                    BinaryStdOut.write(1,1);
-                    BinaryStdOut.write(length, 7);
+            // Length must be within what 8-bits can store
+            if(runSize < MAX_8BIT){
+                // If the current is the same as rest of the string and length is within bounds, add to string length
+                if (curIsOne == isOne){
+                    runSize++;
                 }
                 else{
-                    BinaryStdOut.write(0,1);
-                    BinaryStdOut.write(length, 7);
+                    // If the number switches, write out the string length and continue
+                    BinaryStdOut.write(runSize,8);
+
+                    // Start a new count w/opposite value of isOne
+                    isOne = !isOne;
+                    runSize = 1;
                 }
-                // And start a new count w/opposite value of isOne
-                isOne = !isOne;
-                length = 1;
+            }
+            else{
+                // If run too big, split it into two: print out run and then 8 zeros to switch
+                BinaryStdOut.write(MAX_8BIT, 8);
+                // Represents 0 of the other number to get two consecutive runs of the same #
+                BinaryStdOut.write(0, 8);
+
             }
         }
         BinaryStdOut.close();
