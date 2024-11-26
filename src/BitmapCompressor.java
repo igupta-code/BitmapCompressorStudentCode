@@ -26,33 +26,34 @@
  *  @author Isha Gupta
  */
 public class BitmapCompressor {
-    public static final int MAX_8BIT = 256;
+    public static final int MAX_8BIT = 255;
 
     /**
      * Reads a sequence of bits from standard input, compresses them,
      * and writes the results to standard output.
      */
-    public static void compress() {
+    public static void compress(){
         boolean isOne = BinaryStdIn.readBoolean();
         // runSize = Length
         int runSize = 0;
         boolean curIsOne = false;
 
-
         while(!BinaryStdIn.isEmpty()){
             // Length must be within what 8-bits can store
             if(runSize < MAX_8BIT){
-                // If the current is the same as rest of the string and length is within bounds, add to string length
+                // If it's the same number, add to length of run and read next
                 if (curIsOne == isOne){
                     runSize++;
+                    isOne = BinaryStdIn.readBoolean();
                 }
                 else{
                     // If the number switches, write out the string length and continue
                     BinaryStdOut.write(runSize,8);
 
-                    // Start a new count w/opposite value of isOne
-                    isOne = !isOne;
+                    // Start a new count, switch the current number we're on, read in next number
                     runSize = 1;
+                    curIsOne = isOne;
+                    isOne = BinaryStdIn.readBoolean();
                 }
             }
             else{
@@ -60,7 +61,9 @@ public class BitmapCompressor {
                 BinaryStdOut.write(MAX_8BIT, 8);
                 // Represents 0 of the other number to get two consecutive runs of the same #
                 BinaryStdOut.write(0, 8);
-
+                // 0 or 1???
+                runSize = 0;
+                isOne = BinaryStdIn.readBoolean();
             }
         }
         BinaryStdOut.close();
@@ -70,18 +73,20 @@ public class BitmapCompressor {
      * Reads a sequence of bits from standard input, decodes it,
      * and writes the results to standard output.
      */
-    public static void expand() {
-        boolean isOne = BinaryStdIn.readBoolean();
-        int length = BinaryStdIn.readInt(7);
+    public static void expand(){
+        int length = BinaryStdIn.readInt(8);
+        int counter = 0;
 
-        while(!BinaryStdIn.isEmpty()) {
+        // Since we are writing and reading in 8 bits at a time there should be no excess
+        while(!BinaryStdIn.isEmpty()){
+            // Write out the zero or one for how many times the 8bit code indicates
             for (int i = 0; i < length; i++) {
                 // Writes it out as a boolean (one bit)
-                BinaryStdOut.write(isOne);
+                BinaryStdOut.write(counter%2);
             }
-            // Reads in the next 8 bits
-            isOne = BinaryStdIn.readBoolean();
-            length = BinaryStdIn.readInt(7);
+            // Reads in the next 8 bits and increases counter to switch from 0 to 1 or vice versa
+            counter++;
+            length = BinaryStdIn.readInt(8);
         }
         BinaryStdOut.close();
     }
