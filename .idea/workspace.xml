@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5344144c-2391-49b9-ba87-481b14af2cb8" name="Changes" comment="First">
+    <list default="true" id="5344144c-2391-49b9-ba87-481b14af2cb8" name="Changes" comment="Second attempt">
+      <change beforePath="$PROJECT_DIR$/src/BitmapCompressor.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/BitmapCompressor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BitmapCompressor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BitmapCompressor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/q32x48.bin" beforeDir="false" afterPath="$PROJECT_DIR$/src/q32x48.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/q64x96.bin" beforeDir="false" afterPath="$PROJECT_DIR$/src/q64x96.bin" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +40,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.BitmapCompressor.executor": "Debug",
+    "Application.Unnamed.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true"
@@ -86,22 +86,45 @@
       <option name="project" value="LOCAL" />
       <updated>1731981357867</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="First">
+      <option name="closed" value="true" />
+      <created>1732132580224</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732132580224</updated>
+    </task>
+    <task id="LOCAL-00004" summary="First Attempt">
+      <option name="closed" value="true" />
+      <created>1732242263477</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732242263477</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Second attempt">
+      <option name="closed" value="true" />
+      <created>1732498622324</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732498622324</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Second attempt">
+      <option name="closed" value="true" />
+      <created>1732580135081</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732580135081</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First" />
-    <option name="LAST_COMMIT_MESSAGE" value="First" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/BitmapCompressor.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="First Attempt" />
+    <MESSAGE value="Second attempt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Second attempt" />
   </component>
 </project>

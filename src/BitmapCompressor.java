@@ -25,6 +25,7 @@
  *  @author Zach Blick
  *  @author Isha Gupta
  */
+
 public class BitmapCompressor {
     public static final int MAX_8BIT = 255;
 
@@ -33,18 +34,22 @@ public class BitmapCompressor {
      * and writes the results to standard output.
      */
     public static void compress(){
-        boolean isOne = BinaryStdIn.readBoolean();
+        // Assume the first one is false
+        boolean isOne = false;
         // runSize = Length
         int runSize = 0;
+        // Current string of numbers is 0 or 1
         boolean curIsOne = false;
 
         while(!BinaryStdIn.isEmpty()){
+            // Read this in here instead of 3 places
+            isOne = BinaryStdIn.readBoolean();
+
             // Length must be within what 8-bits can store
             if(runSize < MAX_8BIT){
                 // If it's the same number, add to length of run and read next
-                if (curIsOne == isOne){
+                if(curIsOne == isOne){
                     runSize++;
-                    isOne = BinaryStdIn.readBoolean();
                 }
                 else{
                     // If the number switches, write out the string length and continue
@@ -53,7 +58,6 @@ public class BitmapCompressor {
                     // Start a new count, switch the current number we're on, read in next number
                     runSize = 1;
                     curIsOne = isOne;
-                    isOne = BinaryStdIn.readBoolean();
                 }
             }
             else{
@@ -62,10 +66,12 @@ public class BitmapCompressor {
                 // Represents 0 of the other number to get two consecutive runs of the same #
                 BinaryStdOut.write(0, 8);
                 // 0 or 1???
-                runSize = 0;
-                isOne = BinaryStdIn.readBoolean();
+                runSize = 1;
             }
         }
+        // Might not need this
+        BinaryStdOut.write(runSize,8);
+
         BinaryStdOut.close();
     }
 
@@ -82,7 +88,7 @@ public class BitmapCompressor {
             // Write out the zero or one for how many times the 8bit code indicates
             for (int i = 0; i < length; i++) {
                 // Writes it out as a boolean (one bit)
-                BinaryStdOut.write(counter%2);
+                BinaryStdOut.write(counter%2, 1);
             }
             // Reads in the next 8 bits and increases counter to switch from 0 to 1 or vice versa
             counter++;
