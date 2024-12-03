@@ -34,18 +34,15 @@ public class BitmapCompressor {
      * and writes the results to standard output.
      */
     public static void compress() {
-        // Assume the first one is false
-        boolean isOne = false;
-        // runSize = Length
-        int runSize = 0;
-        // Current string of numbers is 0 or 1
+        // Assume the first bit is a 0 --- curIsOne = value of the current string of bits
         boolean curIsOne = false;
+        boolean isOne = false;
+        int runSize = 0;
 
         while (!BinaryStdIn.isEmpty()) {
-            // Read this in here instead of 3 places
             isOne = BinaryStdIn.readBoolean();
 
-            // If it's the same number, add to length of run and read next
+            // If next bit is the same as the rest of the sequence, nothing changes(keep adding to runSize)
             if (curIsOne == isOne) {
                 // Checks case where run is longer than 8-bit code
                 if (runSize == MAX_8BIT) {
@@ -59,7 +56,7 @@ public class BitmapCompressor {
                 // If the number switches, write out the string length and continue
                 BinaryStdOut.write(runSize, 8);
 
-                // Start a new count, switch the current number we're on, read in next number
+                // Start a new count and switch the current number we're on
                 runSize = 0;
                 curIsOne = isOne;
             }
@@ -78,15 +75,15 @@ public class BitmapCompressor {
         int length;
         int counter = 0;
 
-        // Since we are writing and reading in 8 bits at a time there should be no excess
         while(!BinaryStdIn.isEmpty()){
+            // Reads in 8 bits to find length of run
             length = BinaryStdIn.readInt(8);
-            // Write out the zero or one for how many times the 8bit code indicates
+
+            // Repeatedly prints out 0 or 1 length times
             for (int i = 0; i < length; i++) {
-                // Writes it out as a boolean (one bit)
+                // Counter % 2 switches from 0 to 1
                 BinaryStdOut.write(counter%2, 1);
             }
-            // Reads in the next 8 bits and increases counter to switch from 0 to 1 or vice versa
             counter++;
         }
         BinaryStdOut.close();
